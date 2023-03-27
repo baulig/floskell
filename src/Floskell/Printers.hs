@@ -66,8 +66,8 @@ import qualified Data.ByteString.Builder    as BB
 import qualified Data.ByteString.Lazy       as BL
 import           Data.List                  ( intersperse )
 import qualified Data.Map.Strict            as Map
-import           Data.Monoid                ( (<>) )
 
+-- import           Data.Monoid                ( (<>) )
 import qualified Floskell.Buffer            as Buffer
 import           Floskell.Config
 import           Floskell.Types

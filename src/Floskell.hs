@@ -33,6 +33,7 @@ import           Data.Maybe
 import           Data.Monoid
 #endif
 
+import           Floskell.BlockFilter       ( filterDisabledBlocks )
 import qualified Floskell.Buffer            as Buffer
 import           Floskell.Comments
 import           Floskell.Config
@@ -153,7 +154,7 @@ reformat config mfilepath input = fmap (L8.intercalate "\n")
 
 reformatLines
     :: ParseMode -> Config -> Int -> [ByteString] -> Either String [ByteString]
-reformatLines mode config indent = format . filterPreprocessorDirectives
+reformatLines mode config indent = format . filterDisabledBlocks
   where
     config' = withReducedLineLength indent config
 
@@ -193,32 +194,6 @@ reformatBlock mode config cpp indent lines =
         if srcSpanStartLine (commentSpan x) < srcSpanStartLine (commentSpan y)
         then x : mergeComments xs' ys
         else y : mergeComments xs ys'
-
--- | Remove CPP directives from input source, retur
-filterPreprocessorDirectives :: [ByteString] -> ([ByteString], [Comment])
-filterPreprocessorDirectives lines = (code, comments)
-  where
-    code = map (\l -> if cppLine l then "" else l) lines
-
-    comments = map makeComment . filter (cppLine . snd) $ zip [ 1 .. ] lines
-
-    makeComment (n, l) =
-        Comment PreprocessorDirective
-                (SrcSpan "" n 1 n (fromIntegral $ L8.length l + 1))
-                (L8.unpack l)
-
-    cppLine src =
-        any (`L8.isPrefixOf` src)
-            [ "#if"
-            , "#end"
-            , "#else"
-            , "#define"
-            , "#undef"
-            , "#elif"
-            , "#include"
-            , "#error"
-            , "#warning"
-            ]
 
 prettyPrint :: Printer a -> Config -> Maybe ByteString
 prettyPrint printer = fmap (Buffer.toLazyByteString . psBuffer . snd)

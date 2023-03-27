@@ -41,6 +41,7 @@ library
     exposed-modules:
         Floskell
         Floskell.Attoparsec
+        Floskell.BlockFilter
         Floskell.Buffer
         Floskell.Comments
         Floskell.Config
