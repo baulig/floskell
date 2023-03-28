@@ -79,14 +79,14 @@ chrisDoneCfg =
 
     groupWsOverrides = []
 
-    cfgOptions = OptionConfig { cfgOptionSortPragmas            = False
-                              , cfgOptionSplitLanguagePragmas   = False
-                              , cfgOptionSortImports            = NoImportSort
-                              , cfgOptionSortImportLists        = False
-                              , cfgOptionAlignSumTypeDecl       = True
-                              , cfgOptionFlexibleOneline        = False
-                              , cfgOptionPreserveVerticalSpace  = False
-                              , cfgOptionDeclNoBlankLines       = Set.empty
+    cfgOptions = OptionConfig { cfgOptionSortPragmas = False
+                              , cfgOptionSplitLanguagePragmas = False
+                              , cfgOptionSortImports = NoImportSort
+                              , cfgOptionSortImportLists = False
+                              , cfgOptionAlignSumTypeDecl = True
+                              , cfgOptionFlexibleOneline = False
+                              , cfgOptionPreserveVerticalSpace = False
+                              , cfgOptionDeclNoBlankLines = Set.empty
                               , cfgOptionAlignLetBindsAndInExpr = False
                               }
 
@@ -192,17 +192,16 @@ cramerCfg = defaultConfig { cfgAlign
         , (ConfigMapKey (Just "[") (Just Type), Whitespace WsNone WsNone False)
         ]
 
-    cfgOptions =
-        OptionConfig { cfgOptionSortPragmas            = True
-                     , cfgOptionSplitLanguagePragmas   = True
-                     , cfgOptionSortImports            = SortImportsByPrefix
-                     , cfgOptionSortImportLists        = True
-                     , cfgOptionAlignSumTypeDecl       = False
-                     , cfgOptionFlexibleOneline        = False
-                     , cfgOptionPreserveVerticalSpace  = True
-                     , cfgOptionDeclNoBlankLines       = Set.empty
-                     , cfgOptionAlignLetBindsAndInExpr = False
-                     }
+    cfgOptions = OptionConfig { cfgOptionSortPragmas = True
+                              , cfgOptionSplitLanguagePragmas = True
+                              , cfgOptionSortImports = SortImportsByPrefix
+                              , cfgOptionSortImportLists = True
+                              , cfgOptionAlignSumTypeDecl = False
+                              , cfgOptionFlexibleOneline = False
+                              , cfgOptionPreserveVerticalSpace = True
+                              , cfgOptionDeclNoBlankLines = Set.empty
+                              , cfgOptionAlignLetBindsAndInExpr = False
+                              }
 
 gibianskyCfg :: Config
 gibianskyCfg = defaultConfig { cfgAlign
@@ -282,14 +281,14 @@ gibianskyCfg = defaultConfig { cfgAlign
     groupWsOverrides =
         [ (ConfigMapKey (Just "{") Nothing, Whitespace WsBoth WsAfter False) ]
 
-    cfgOptions = OptionConfig { cfgOptionSortPragmas            = False
-                              , cfgOptionSplitLanguagePragmas   = False
-                              , cfgOptionSortImports            = NoImportSort
-                              , cfgOptionSortImportLists        = False
-                              , cfgOptionAlignSumTypeDecl       = False
-                              , cfgOptionFlexibleOneline        = False
-                              , cfgOptionPreserveVerticalSpace  = False
-                              , cfgOptionDeclNoBlankLines       = Set.empty
+    cfgOptions = OptionConfig { cfgOptionSortPragmas = False
+                              , cfgOptionSplitLanguagePragmas = False
+                              , cfgOptionSortImports = NoImportSort
+                              , cfgOptionSortImportLists = False
+                              , cfgOptionAlignSumTypeDecl = False
+                              , cfgOptionFlexibleOneline = False
+                              , cfgOptionPreserveVerticalSpace = False
+                              , cfgOptionDeclNoBlankLines = Set.empty
                               , cfgOptionAlignLetBindsAndInExpr = False
                               }
 
@@ -370,14 +369,128 @@ johanTibellCfg =
           )
         ]
 
-    cfgOptions = OptionConfig { cfgOptionSortPragmas            = False
-                              , cfgOptionSplitLanguagePragmas   = False
-                              , cfgOptionSortImports            = NoImportSort
-                              , cfgOptionSortImportLists        = False
-                              , cfgOptionAlignSumTypeDecl       = True
-                              , cfgOptionFlexibleOneline        = True
-                              , cfgOptionPreserveVerticalSpace  = False
-                              , cfgOptionDeclNoBlankLines       = Set.empty
+    cfgOptions = OptionConfig { cfgOptionSortPragmas = False
+                              , cfgOptionSplitLanguagePragmas = False
+                              , cfgOptionSortImports = NoImportSort
+                              , cfgOptionSortImportLists = False
+                              , cfgOptionAlignSumTypeDecl = True
+                              , cfgOptionFlexibleOneline = True
+                              , cfgOptionPreserveVerticalSpace = False
+                              , cfgOptionDeclNoBlankLines = Set.empty
+                              , cfgOptionAlignLetBindsAndInExpr = False
+                              }
+
+martinCfg :: Config
+martinCfg = defaultConfig { cfgAlign
+                          , cfgIndent
+                          , cfgLayout
+                          , cfgOp
+                          , cfgGroup
+                          , cfgOptions
+                          }
+  where
+    cfgAlign = AlignConfig { cfgAlignLimits       = (10, 25)
+                           , cfgAlignCase         = False
+                           , cfgAlignClass        = False
+                           , cfgAlignImportModule = True
+                           , cfgAlignImportSpec   = True
+                           , cfgAlignLetBinds     = False
+                           , cfgAlignMatches      = False
+                           , cfgAlignRecordFields = True
+                           , cfgAlignWhere        = False
+                           }
+
+    cfgIndent =
+        IndentConfig { cfgIndentOnside = 4
+                     , cfgIndentDeriving = 4
+                     , cfgIndentWhere = 2
+                     , cfgIndentApp = Align
+                     , cfgIndentCase = IndentBy 4
+                     , cfgIndentClass = IndentBy 4
+                     , cfgIndentDo = IndentBy 4
+                     , cfgIndentIf = Align
+                     , cfgIndentLet = Align
+                     , cfgIndentLetBinds = Align
+                     , cfgIndentLetIn = IndentBy 4
+                     , cfgIndentMultiIf = IndentBy 4
+                     , cfgIndentTypesig = Align
+                     , cfgIndentWhereBinds = IndentBy 2
+                     , cfgIndentExportSpecList = IndentBy 4
+                     , cfgIndentImportSpecList = AlignOrIndentBy 17
+                     }
+
+    cfgLayout = LayoutConfig { cfgLayoutApp = TryOneline
+                             , cfgLayoutConDecls = TryOneline
+                             , cfgLayoutDeclaration = Flex
+                             , cfgLayoutExportSpecList = TryOneline
+                             , cfgLayoutIf = TryOneline
+                             , cfgLayoutImportSpecList = Flex
+                             , cfgLayoutInfixApp = Flex
+                             , cfgLayoutLet = TryOneline
+                             , cfgLayoutListComp = TryOneline
+                             , cfgLayoutRecord = TryOneline
+                             , cfgLayoutType = TryOneline
+                             }
+
+    cfgOp =
+        OpConfig ConfigMap { cfgMapDefault   = Whitespace WsBoth WsBefore False
+                           , cfgMapOverrides = Map.fromList opWsOverrides
+                           }
+
+    opWsOverrides =
+        [ (ConfigMapKey (Just ",") Nothing, Whitespace WsAfter WsBefore False)
+        , ( ConfigMapKey (Just "record") Nothing
+          , Whitespace WsAfter WsNone False
+          )
+        , ( ConfigMapKey (Just ".") (Just Type)
+          , Whitespace WsAfter WsAfter False
+          )
+        , (ConfigMapKey (Just "=") Nothing, Whitespace WsBoth WsAfter False)
+        , (ConfigMapKey (Just "$") Nothing, Whitespace WsBoth WsBefore False)
+        , (ConfigMapKey (Just "@") Nothing, Whitespace WsNone WsNone False)
+        , ( ConfigMapKey (Just "->") (Just Expression)
+          , Whitespace WsBoth WsAfter False
+          )
+        , ( ConfigMapKey (Just "record") (Just Pattern)
+          , Whitespace WsNone WsNone False
+          )
+        ]
+
+    cfgGroup =
+        GroupConfig ConfigMap { cfgMapDefault   =
+                                    Whitespace WsBoth WsAfter False
+                              , cfgMapOverrides = Map.fromList groupWsOverrides
+                              }
+
+    groupWsOverrides =
+        [ (ConfigMapKey Nothing (Just Type), Whitespace WsNone WsAfter False)
+        , ( ConfigMapKey Nothing (Just Pattern)
+          , Whitespace WsNone WsAfter False
+          )
+        , (ConfigMapKey (Just "$(") Nothing, Whitespace WsNone WsNone False)
+        , (ConfigMapKey (Just "[|") Nothing, Whitespace WsNone WsNone False)
+        , (ConfigMapKey (Just "[d|") Nothing, Whitespace WsNone WsNone False)
+        , (ConfigMapKey (Just "[p|") Nothing, Whitespace WsNone WsNone False)
+        , (ConfigMapKey (Just "[t|") Nothing, Whitespace WsNone WsNone False)
+        , (ConfigMapKey (Just "(") Nothing, Whitespace WsNone WsAfter False)
+        , ( ConfigMapKey (Just "(") (Just Other)
+          , Whitespace WsNone WsAfter False
+          )
+        , (ConfigMapKey (Just "[") Nothing, Whitespace WsNone WsAfter False)
+        , ( ConfigMapKey (Just "[") (Just Pattern)
+          , Whitespace WsBoth WsAfter False
+          )
+        , (ConfigMapKey (Just "[") (Just Type), Whitespace WsNone WsNone False)
+        ]
+
+    cfgOptions = OptionConfig { cfgOptionSortPragmas = True
+                              , cfgOptionSplitLanguagePragmas = True
+                              , cfgOptionSortImports = SortImportsByPrefix
+                              , cfgOptionSortImportLists = True
+                              , cfgOptionAlignSumTypeDecl = False
+                              , cfgOptionFlexibleOneline = False
+                              , cfgOptionPreserveVerticalSpace = True
+                              , cfgOptionDeclNoBlankLines = Set.empty
                               , cfgOptionAlignLetBindsAndInExpr = False
                               }
 
@@ -417,6 +530,13 @@ johanTibell = Style { styleName        = "johan-tibell"
                     , styleConfig      = johanTibellCfg
                     }
 
+martin :: Style
+martin = Style { styleName        = "martin"
+               , styleAuthor      = "Martin Baulig"
+               , styleDescription = "Martin Baulig's style"
+               , styleConfig      = martinCfg
+               }
+
 -- | Styles list, useful for programmatically choosing.
 styles :: [Style]
-styles = [ base, chrisDone, johanTibell, gibiansky, cramer ]
+styles = [ base, chrisDone, johanTibell, gibiansky, cramer, martin ]
