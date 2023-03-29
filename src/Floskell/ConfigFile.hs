@@ -30,6 +30,7 @@ import           Data.Aeson
                  ( (.:?), (.=), FromJSON(..), ToJSON(..) )
 import qualified Data.Aeson                 as JSON
 import qualified Data.Aeson.Types           as JSON ( typeMismatch )
+import qualified Data.Yaml                  as YAML
 import qualified Data.Attoparsec.ByteString as AP
 import qualified Data.ByteString            as BS
 import           Data.Char                  ( isLetter, isSpace )
@@ -59,7 +60,7 @@ import           System.Directory
                  , getAppUserDataDirectory, getCurrentDirectory
                  , getHomeDirectory, getXdgDirectory )
 import           System.FilePath
-                 ( joinPath, splitDirectories, takeDirectory )
+                 ( joinPath, splitDirectories, takeDirectory, takeExtension )
 
 data AppConfig = AppConfig { appStyle      :: Style
                            , appLanguage   :: Language
@@ -198,7 +199,10 @@ findAppConfigIn src = do
 readAppConfig :: FilePath -> IO AppConfig
 readAppConfig file = do
     text <- BS.readFile file
-    either (error . (++) (file ++ ": ")) return $ eitherDecodeStrict text
+    either (error . (++) (file ++ ": ")) return $
+        if takeExtension file == ".yaml"
+        then eitherDecodeYamlStrict text
+        else eitherDecodeStrict text
 
 setStyle :: AppConfig -> Maybe String -> AppConfig
 setStyle cfg mbStyle =
@@ -227,3 +231,10 @@ eitherDecodeStrict i = case parseOnly jsonEOF' i of
 
     skipSpace =
         AP.skipWhile $ \w -> w == 0x20 || w == 0x0a || w == 0x0d || w == 0x09
+
+eitherDecodeYamlStrict :: FromJSON a => BS.ByteString -> Either String a
+eitherDecodeYamlStrict i = case YAML.decodeEither' i of
+    Right x -> case JSON.fromJSON x of
+        JSON.Error e -> Left e
+        JSON.Success x' -> Right x'
+    Left e -> Left $ YAML.prettyPrintParseException e

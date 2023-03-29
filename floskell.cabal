@@ -1,129 +1,174 @@
-cabal-version:      >=1.10
-name:               floskell
-version:            0.10.7
-license:            BSD3
-license-file:       LICENSE.md
-copyright:
-    2014 Chris Done, 2015 Andrew Gibiansky, 2016-2020 Enno Cramer
+cabal-version: 1.12
 
-maintainer:         ecramer@memfrob.de
-author:
-    Chris Done, Andrew Gibiansky, Tobias Pflug, Pierre Radermecker, Enno Cramer
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
 
-stability:          Unstable
-homepage:           https://github.com/ennocramer/floskell
-bug-reports:        https://github.com/ennocramer/floskell/issues
-synopsis:           A flexible Haskell source code pretty printer
-description:
-    A flexible Haskell source code pretty printer.
-    .
-    See the Github page for usage\/explanation: <https://github.com/ennocramer/floskell>
-
-category:           Development
-build-type:         Simple
-data-files:
-    contrib/floskell.el
-    contrib/floskell.coffee
-
+name:           floskell
+version:        0.10.7
+synopsis:       A flexible Haskell source code pretty printer
+description:    A flexible Haskell source code pretty printer.
+                .
+                See the Github page for usage\/explanation: <https://github.com/ennocramer/floskell>
+category:       Development
+stability:      Unstable
+homepage:       https://github.com/ennocramer/floskell
+bug-reports:    https://github.com/ennocramer/floskell/issues
+author:         Chris Done, Andrew Gibiansky, Tobias Pflug, Pierre Radermecker, Enno Cramer
+maintainer:     ecramer@memfrob.de
+copyright:      2014 Chris Done, 2015 Andrew Gibiansky, 2016-2020 Enno Cramer
+license:        BSD3
+license-file:   LICENSE.md
+build-type:     Simple
 extra-source-files:
     README.md
     CHANGELOG.md
     BENCHMARK.md
     TEST.md
     stack.yaml
-    styles/*.md
+    styles/base.md
+    styles/chris-done.md
+    styles/cramer.md
+    styles/fundamental.md
+    styles/gibiansky.md
+    styles/johan-tibell.md
+    styles/martin.md
+data-files:
+    contrib/floskell.el
+    contrib/floskell.coffee
 
 source-repository head
-    type:     git
-    location: https://github.com/ennocramer/floskell
+  type: git
+  location: https://github.com/ennocramer/floskell
 
 library
-    exposed-modules:
-        Floskell
-        Floskell.Attoparsec
-        Floskell.BlockFilter
-        Floskell.Buffer
-        Floskell.Comments
-        Floskell.Config
-        Floskell.ConfigFile
-        Floskell.Fixities
-        Floskell.Imports
-        Floskell.Pretty
-        Floskell.Printers
-        Floskell.Styles
-        Floskell.Types
-
-    hs-source-dirs:   src/
-    default-language: Haskell2010
-    ghc-options:      -Wall
-    build-depends:
-        base >=4.9 && <4.18,
-        aeson >=0.11.3.0 && <2.2,
-        attoparsec >=0.13.1.0 && <0.15,
-        bytestring >=0.10.8.1 && <0.12,
-        containers >=0.5.7.1 && <0.7,
-        data-default >=0.7.1.1 && <0.8,
-        directory >=1.2.6.2 && <1.4,
-        filepath >=1.4.1.0 && <1.5,
-        haskell-src-exts >=1.19 && <1.24,
-        monad-dijkstra >=0.1.1 && <0.2,
-        mtl >=2.2.1 && <2.4,
-        text >=1.2.2.2 && <2.1,
-        transformers >=0.5.2.0 && <0.7,
-        unordered-containers >=0.2.8.0 && <0.3,
-        utf8-string >=1.0.1.1 && <1.1
+  exposed-modules:
+      Floskell
+      Floskell.Attoparsec
+      Floskell.BlockFilter
+      Floskell.Buffer
+      Floskell.Comments
+      Floskell.Config
+      Floskell.ConfigFile
+      Floskell.Fixities
+      Floskell.Imports
+      Floskell.Pretty
+      Floskell.Printers
+      Floskell.Styles
+      Floskell.Types
+  other-modules:
+      Paths_floskell
+  hs-source-dirs:
+      src/
+  ghc-options: -Wall
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , containers
+    , data-default
+    , directory
+    , filepath
+    , haskell-src-exts
+    , hspec
+    , monad-dijkstra
+    , mtl
+    , text
+    , transformers
+    , unordered-containers
+    , utf8-string
+    , yaml
+  default-language: Haskell2010
 
 executable floskell
-    main-is:          Main.hs
-    hs-source-dirs:   src/main
-    default-language: Haskell2010
-    ghc-options:
-        -Wall -Wno-missing-home-modules -optP-Wno-nonportable-include-path
-
-    build-depends:
-        base >=4.9 && <4.18,
-        floskell -any,
-        aeson-pretty >=0.8.2 && <0.9,
-        bytestring >=0.10.8.1 && <0.12,
-        directory >=1.2.6.2 && <1.4,
-        ghc-prim >=0.5.0.0 && <0.10,
-        haskell-src-exts >=1.19 && <1.24,
-        optparse-applicative >=0.12.1.0 && <0.18,
-        text >=1.2.2.2 && <2.1
+  main-is: Main.hs
+  other-modules:
+      Paths_floskell
+  hs-source-dirs:
+      src/main
+  ghc-options: -Wall -Wno-missing-home-modules -optP-Wno-nonportable-include-path
+  build-depends:
+      aeson
+    , aeson-pretty
+    , attoparsec
+    , base
+    , bytestring
+    , directory
+    , floskell
+    , ghc-prim
+    , haskell-src-exts
+    , hspec
+    , optparse-applicative
+    , text
+  default-language: Haskell2010
 
 test-suite floskell-test
-    type:             exitcode-stdio-1.0
-    main-is:          Test.hs
-    hs-source-dirs:   src/main
-    other-modules:    Markdone
-    default-language: Haskell2010
-    ghc-options:      -Wall -threaded -rtsopts -with-rtsopts=-N
-    build-depends:
-        base >=4.9 && <4.18,
-        floskell -any,
-        bytestring >=0.10.8.1 && <0.12,
-        deepseq >=1.4.2.0 && <1.5,
-        exceptions >=0.8.3 && <0.12,
-        haskell-src-exts >=1.19 && <1.24,
-        hspec >=2.2.4 && <2.11,
-        text >=1.2.2.2 && <2.1,
-        utf8-string >=1.0.1.1 && <1.1
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Markdone
+  hs-source-dirs:
+      src/test
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , deepseq
+    , exceptions
+    , floskell
+    , haskell-src-exts
+    , hspec
+    , text
+    , utf8-string
+  default-language: Haskell2010
+
+test-suite new-test
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Utils
+      Paths_floskell
+  hs-source-dirs:
+      src/new-test
+  ghc-options: -Wall -Wcompat -Wcpp-undef -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wmissing-deriving-strategies -Wunused-packages -Wmonomorphism-restriction -Wmissing-local-signatures -Wmissed-specialisations
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , directory
+    , exceptions
+    , filepath
+    , floskell
+    , haskell-src-exts
+    , hspec
+    , text
+    , utf8-string
+  default-language: Haskell2010
 
 benchmark floskell-bench
-    type:             exitcode-stdio-1.0
-    main-is:          Benchmark.hs
-    hs-source-dirs:   src/main
-    other-modules:    Markdone
-    default-language: Haskell2010
-    ghc-options:      -Wall -threaded -rtsopts -with-rtsopts=-N
-    build-depends:
-        base >=4.9 && <4.18,
-        floskell -any,
-        bytestring >=0.10.8.1 && <0.12,
-        criterion >=1.1.1.0 && <1.7,
-        deepseq >=1.4.2.0 && <1.5,
-        exceptions >=0.8.3 && <0.11,
-        ghc-prim >=0.5.0.0 && <0.10,
-        haskell-src-exts >=1.19 && <1.24,
-        text >=1.2.2.2 && <2.1,
-        utf8-string >=1.0.1.1 && <1.1
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Markdone
+  hs-source-dirs:
+      src/main
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , attoparsec
+    , base
+    , bytestring
+    , criterion
+    , deepseq
+    , exceptions
+    , floskell
+    , ghc-prim
+    , haskell-src-exts
+    , hspec
+    , text
+    , utf8-string
+  default-language: Haskell2010

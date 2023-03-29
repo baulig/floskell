@@ -1,0 +1,83 @@
+#+title: New Test Suite
+#+author: Martin Baulig
+
+* New Configuration
+
+Instead of having the test runner parse a =.md= file, we use *Emacs Org Mode* and ~org-babel-tangle~ to split things up.
+
+One or more test-cases are grouped together in a subdirectory with an optional ~floskell.yaml~ config file.
+
+* Comments
+
+Normal comment.
+
+#+begin_src haskell :tangle comments/normal.hs :mkdirp yes
+-- normal comment
+foo :: Int
+foo = 0
+#+end_src
+
+Two comments.
+
+#+begin_src haskell :tangle comments/two-comments.hs :mkdirp yes
+-- first comment
+foo :: Int
+foo = 0
+
+-- second comment
+bar :: Int
+bar = 1
+#+end_src
+
+* Imports
+
+** Default configuration
+
+By default, all imports are sorted alphabetically.
+
+#+begin_src haskell :tangle imports-default/simple-imports.hs :mkdirp yes
+import           Control.Monad
+
+import           Data.Bool
+
+import           RIO
+
+import           Yesod
+
+import           Zoom
+#+end_src
+
+** Custom configuration
+
+Provide some custom configuration that groups things: ~Prelude~ / ~RIO~ first, then all other imports, ~Yesod~ last.
+
+#+begin_src yaml :tangle imports-custom/floskell.yaml :mkdirp yes
+style: martin
+
+formatting:
+  options:
+    sort-imports:
+      - order: grouped
+        prefixes:
+          - Prelude
+          - RIO
+      - order: grouped
+        prefixes:
+          - ""
+      - order: grouped
+        prefixes:
+          - Yesod
+#+end_src
+
+#+begin_src haskell :tangle imports-custom/imports.hs :mkdirp yes
+import           RIO
+
+import           Control.Monad
+
+import           Data.Bool
+
+import           Zoom
+
+import           Yesod
+#+end_src
+
