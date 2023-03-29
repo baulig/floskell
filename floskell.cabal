@@ -60,6 +60,12 @@ library
       Paths_floskell
   hs-source-dirs:
       src/
+  default-extensions:
+      DerivingStrategies
+      GADTs
+      GeneralizedNewtypeDeriving
+      OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall
   build-depends:
       aeson
@@ -69,6 +75,7 @@ library
     , containers
     , data-default
     , directory
+    , extra
     , filepath
     , haskell-src-exts
     , hspec
@@ -87,6 +94,12 @@ executable floskell
       Paths_floskell
   hs-source-dirs:
       src/main
+  default-extensions:
+      DerivingStrategies
+      GADTs
+      GeneralizedNewtypeDeriving
+      OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall -Wno-missing-home-modules -optP-Wno-nonportable-include-path
   build-depends:
       aeson
@@ -94,7 +107,9 @@ executable floskell
     , attoparsec
     , base
     , bytestring
+    , containers
     , directory
+    , extra
     , floskell
     , ghc-prim
     , haskell-src-exts
@@ -110,14 +125,22 @@ test-suite floskell-test
       Markdone
   hs-source-dirs:
       src/test
+  default-extensions:
+      DerivingStrategies
+      GADTs
+      GeneralizedNewtypeDeriving
+      OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson
     , attoparsec
     , base
     , bytestring
+    , containers
     , deepseq
     , exceptions
+    , extra
     , floskell
     , haskell-src-exts
     , hspec
@@ -133,14 +156,22 @@ test-suite new-test
       Paths_floskell
   hs-source-dirs:
       src/new-test
+  default-extensions:
+      DerivingStrategies
+      GADTs
+      GeneralizedNewtypeDeriving
+      OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall -Wcompat -Wcpp-undef -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wmissing-deriving-strategies -Wunused-packages -Wmonomorphism-restriction -Wmissing-local-signatures -Wmissed-specialisations
   build-depends:
       aeson
     , attoparsec
     , base
     , bytestring
+    , containers
     , directory
     , exceptions
+    , extra
     , filepath
     , floskell
     , haskell-src-exts
@@ -156,15 +187,23 @@ benchmark floskell-bench
       Markdone
   hs-source-dirs:
       src/main
+  default-extensions:
+      DerivingStrategies
+      GADTs
+      GeneralizedNewtypeDeriving
+      OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson
     , attoparsec
     , base
     , bytestring
+    , containers
     , criterion
     , deepseq
     , exceptions
+    , extra
     , floskell
     , ghc-prim
     , haskell-src-exts

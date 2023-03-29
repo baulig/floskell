@@ -47,6 +47,25 @@ import           Yesod
 import           Zoom
 #+end_src
 
+Unsorted example:
+
+#+begin_src haskell :tangle imports-default/simple-imports.unsorted.hs :mkdirp yes
+import Data.Bool
+import RIO
+import Yesod
+import Control.Monad
+import Zoom
+#+end_src
+
+
+#+begin_src haskell :tangle imports-default/simple-imports.unformatted.hs :mkdirp yes
+import Data.Bool
+import RIO
+import Yesod
+import Control.Monad
+import Zoom
+#+end_src
+
 ** Custom configuration
 
 Provide some custom configuration that groups things: ~Prelude~ / ~RIO~ first, then all other imports, ~Yesod~ last.

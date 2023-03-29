@@ -17,26 +17,17 @@ import           System.FilePath       ( (</>), takeExtension )
 
 import           Test.Hspec
 
+import Utils
+
 -- | Root directory of the test case tree.
 rootDir :: FilePath
 rootDir = "src/new-test/test-cases"
 
--- | Same as 'listDirectory', but include the directory 'path' in the results.
-listDirectoryWithPrefix :: FilePath -> IO [FilePath]
-listDirectoryWithPrefix path = fmap (path </>) <$> listDirectory path
-
--- | Find all subdirectories in 'path'.
-listSubdirectories :: FilePath -> IO [FilePath]
-listSubdirectories path =
-    listDirectoryWithPrefix path >>= filterM doesDirectoryExist
-
--- | Find all files with extension 'ext' in 'path'.
-listFilesWithExtension :: FilePath -> FilePath -> IO [FilePath]
-listFilesWithExtension path ext = filter ((==) ext . takeExtension)
-    <$> listDirectoryWithPrefix path
-
 main :: IO ()
 main = do
+    entries <- scanDirectory rootDir
+    putStrLn $ "GOT ENTRIES: " <> show entries
+
     directories <- listSubdirectories rootDir
     putStrLn $ "TEST: " <> show directories
 
